@@ -1,6 +1,6 @@
 # 🤖 Dify QA Pipeline
 
-[![Dify](https://img.shields.io/badge/Dify-AI%20Pipeline-blue)](https://udify.app/chat/qBltfko2ToZ38pUX)
+[![Dify](https://img.shields.io/badge/Dify-AI%20Pipeline-blue)](https://udify.app/chat/qBItfkx2ToZ38pUX)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.12+-yellow)](https://www.python.org/)
 
@@ -10,9 +10,9 @@ AI-пайплайн для автоматической генерации те�
 
 ## 🌐 Онлайн-демо
 
-**Попробовать прямо сейчас (без установки):** [https://udify.app/chat/qBltfko2ToZ38pUX](https://udify.app/chat/qBltfko2ToZ38pUX)
+**Попробовать прямо сейчас (без установки):** [https://udify.app/chat/qBItfkx2ToZ38pUX](https://udify.app/chat/qBItfkx2ToZ38pUX)
 
-[![Try it now](https://img.shields.io/badge/🚀-Запустить%20пайплайн-blue?style=for-the-badge)](https://udify.app/chat/qBltfko2ToZ38pUX)
+[![Try it now](https://img.shields.io/badge/🚀-Запустить%20пайплайн-blue?style=for-the-badge)](https://udify.app/chat/qBItfkx2ToZ38pUX)
 
 ---
 
@@ -31,7 +31,6 @@ AI-пайплайн для автоматической генерации те�
 
 ## 📊 Пример результата
 
-```json
 {
   "summary": {
     "total_test_cases": 5,
