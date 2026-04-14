@@ -1,0 +1,387 @@
+app:
+  description: Пайплайн для генерации и анализа тест-кейсов
+  icon: face_in_clouds
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: AI QA Pipeline
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/gemini:0.7.20@de0063a630a6d1b2c025fb84f3462ba5151fb60618309cd595c3f4711b1df847
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1776171497789-source-1776174232548-target
+      source: '1776171497789'
+      sourceHandle: source
+      target: '1776174232548'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 1776174232548-source-1776174437076-target
+      source: '1776174232548'
+      sourceHandle: source
+      target: '1776174437076'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1776174437076-8de4b4f5-8112-4bbb-9dab-256ceff696dd-1776175493623-target
+      source: '1776174437076'
+      sourceHandle: 8de4b4f5-8112-4bbb-9dab-256ceff696dd
+      target: '1776175493623'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1776175493623-source-1776175633875-target
+      source: '1776175493623'
+      sourceHandle: source
+      target: '1776175633875'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1776175633875-source-1776175772740-target
+      source: '1776175633875'
+      sourceHandle: source
+      target: '1776175772740'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1776175772740-source-1776175924329-target
+      source: '1776175772740'
+      sourceHandle: source
+      target: '1776175924329'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: Начало
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: requirements
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: requirements
+      height: 108
+      id: '1776171497789'
+      position:
+        x: 97
+        y: 231
+      positionAbsolute:
+        x: 97
+        y: 231
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.4
+          mode: chat
+          name: gemini-3.1-flash-lite-preview
+          provider: langgenius/gemini/google
+        prompt_template:
+        - id: 7e29dd98-c93f-4be4-a451-0e7eeb4aad82
+          role: system
+          text: 'Ты — эксперт по тест-дизайну. '
+        - id: eed12e9b-2c64-49cf-8e7b-cf7e52b545b7
+          role: user
+          text: 'Проверь, достаточно ли информации в требованиях для генерации тест-кейсов.
+
+
+            Требования: {{requirements}}
+
+
+            Если информации достаточно, ответь: "ДОСТАТОЧНО"
+
+            Если не хватает (нет описания действий, ожидаемого результата), ответь:
+            "НЕДОСТАТОЧНО: [чего именно не хватает]"'
+        selected: false
+        structured_output_enabled: true
+        title: LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1776174232548'
+      position:
+        x: 400.5157165665105
+        y: 2.1267984569299756
+      positionAbsolute:
+        x: 400.5157165665105
+        y: 2.1267984569299756
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        cases:
+        - case_id: 8de4b4f5-8112-4bbb-9dab-256ceff696dd
+          conditions:
+          - comparison_operator: contains
+            id: 8542e566-7450-4731-915d-14aa5745a327
+            value: ДОСТАТОЧНО
+            varType: string
+            variable_selector:
+            - '1776174232548'
+            - text
+          id: 8de4b4f5-8112-4bbb-9dab-256ceff696dd
+          logical_operator: and
+        selected: false
+        title: ЕСЛИ/ИНАЧЕ
+        type: if-else
+      height: 147
+      id: '1776174437076'
+      position:
+        x: 702.3195079107729
+        y: 231
+      positionAbsolute:
+        x: 702.3195079107729
+        y: 231
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import re\n\ndef main(requirements: str) -> dict:\n    patterns = {\n\
+          \        'email': r'\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\\
+          b',\n        'phone': r'\\b(?:\\+?7|8)?[\\s\\-]?\\(?[0-9]{3}\\)?[\\s\\-]?[0-9]{3}[\\\
+          s\\-]?[0-9]{2}[\\s\\-]?[0-9]{2}\\b',\n        'password': r'(?i)(password|пароль)[\\\
+          s]*[:=]?[\\s]*\\S+'\n    }\n    \n    masked = requirements\n    for name,\
+          \ pattern in patterns.items():\n        masked = re.sub(pattern, f'[{name.upper()}_MASKED]',\
+          \ masked)\n    \n    return {'masked_text': masked}"
+        code_language: python3
+        outputs:
+          masked_text:
+            children: null
+            type: string
+        selected: false
+        title: Код
+        type: code
+        variables:
+        - value_selector:
+          - '1776171497789'
+          - requirements
+          value_type: string
+          variable: requirements
+      height: 51
+      id: '1776175493623'
+      position:
+        x: 998.2566416447314
+        y: -35.76611570582999
+      positionAbsolute:
+        x: 998.2566416447314
+        y: -35.76611570582999
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gemini-3.1-flash-lite-preview
+          provider: langgenius/gemini/google
+        prompt_template:
+        - id: 6863853c-c293-456c-bfa1-d0c4d274b7d3
+          role: system
+          text: Ты — эксперт по тест-дизайну.
+        - id: f0942046-c96f-4374-97f8-b94b83859d6a
+          role: user
+          text: "Сгенерируй тест-кейсы на основе требований.\n\nТребования: {{masked_text}}\n\
+            \nФормат каждого тест-кейса (JSON):\n{\n  \"id\": \"TC-001\",\n  \"title\"\
+            : \"Название\",\n  \"description\": \"Описание\",\n  \"expected_result\"\
+            : \"Ожидаемый результат\",\n  \"complexity\": 1-10,\n  \"priority\": \"\
+            High/Medium/Low\",\n  \"tags\": [\"smoke\", \"regression\", \"critical\"\
+            , \"negative\", \"positive\"],\n  \"estimated_time\": \"X мин\"\n}\n\n\
+            Верни ТОЛЬКО JSON (массив тест-кейсов)."
+        selected: false
+        structured_output_enabled: true
+        title: LLM 2
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1776175633875'
+      position:
+        x: 1306.319507910773
+        y: 231
+      positionAbsolute:
+        x: 1306.319507910773
+        y: 231
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\ndef main(test_cases_json: str) -> dict:\n    try:\n\
+          \        test_cases = json.loads(test_cases_json)\n        if not isinstance(test_cases,\
+          \ list):\n            test_cases = [test_cases]\n\n        total = len(test_cases)\n\
+          \        complexities = [tc.get('complexity', 5) for tc in test_cases]\n\
+          \        tags = [tag for tc in test_cases for tag in tc.get('tags', [])]\n\
+          \        tag_distribution = {t: tags.count(t) for t in set(tags)}\n\n  \
+          \      result = {\n            \"summary\": {\n                \"total_test_cases\"\
+          : total,\n                \"avg_complexity\": round(sum(complexities)/total,\
+          \ 1) if total else 0,\n                \"tags_distribution\": tag_distribution\n\
+          \            },\n            \"test_cases\": test_cases\n        }\n\n \
+          \       return {'final_json': json.dumps(result, ensure_ascii=False, indent=2)}\n\
+          \    except Exception as e:\n        return {'final_json': f'{{\"error\"\
+          : \"{str(e)}\"}}'}"
+        code_language: python3
+        outputs:
+          final_json:
+            children: null
+            type: string
+        selected: false
+        title: Код 2
+        type: code
+        variables:
+        - value_selector:
+          - '1776175633875'
+          - text
+          value_type: string
+          variable: test_cases_json
+      height: 51
+      id: '1776175772740'
+      position:
+        x: 1626.5081067088975
+        y: -35.76611570582999
+      positionAbsolute:
+        x: 1626.5081067088975
+        y: -35.76611570582999
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1776175772740'
+          - final_json
+          value_type: string
+          variable: final_json
+        selected: false
+        title: Вывод
+        type: end
+      height: 88
+      id: '1776175924329'
+      position:
+        x: 1946.6967055070224
+        y: 231
+      positionAbsolute:
+        x: 1946.6967055070224
+        y: 231
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 22.519310714742915
+      y: 234.0768987197489
+      zoom: 0.5000000000000008
+  rag_pipeline_variables: []
